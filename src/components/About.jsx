@@ -1,25 +1,20 @@
 import { profile } from '../data/profile.js';
 
 export default function About() {
+  const { avatar } = profile;
+
   return (
-    <section id="about" className="section hero">
-      <div className="container">
-        <div className="hero-content">
-          {profile.avatar && (
-            <img className="avatar" src={profile.avatar} alt={profile.name} />
-          )}
-          <div>
-            <p className="eyebrow">{profile.location}</p>
-            <h1>{profile.name}</h1>
-            <p className="title">{profile.title}</p>
-            <p className="tagline">{profile.tagline}</p>
-            <div className="about">
-              {profile.about.map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
-              ))}
-            </div>
+    <section id="about" className="section">
+      <h2 className="section-title">About</h2>
+      <div className="about">
+        {avatar && (
+          <div className="about-photo">
+            <img src={avatar} alt={profile.name} />
           </div>
-        </div>
+        )}
+        {profile.about.map((paragraph, i) => (
+          <p key={i}>{paragraph}</p>
+        ))}
       </div>
     </section>
   );

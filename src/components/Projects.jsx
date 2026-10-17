@@ -1,32 +1,35 @@
 import { profile } from '../data/profile.js';
+import { ExternalLinkIcon } from './Icons.jsx';
 
 export default function Projects() {
   return (
     <section id="projects" className="section">
-      <div className="container">
-        <h2>Projects</h2>
-        <div className="projects-grid">
-          {profile.projects.map((project) => (
-            <article className="card project" key={project.name}>
-              <h3>{project.name}</h3>
-              <p>{project.description}</p>
+      <h2 className="section-title">Projects</h2>
+      <ul className="list">
+        {profile.projects.map((project) => {
+          const href = project.link || project.repo;
+          return (
+            <li className="item" key={project.name}>
+              <h3>
+                {href ? (
+                  <a className="project-title" href={href} target="_blank" rel="noopener noreferrer">
+                    {project.name}
+                    <ExternalLinkIcon width={14} height={14} />
+                  </a>
+                ) : (
+                  <span className="project-title">{project.name}</span>
+                )}
+              </h3>
+              <p className="project-desc">{project.description}</p>
               <ul className="chip-list">
                 {project.tech.map((t) => (
                   <li className="chip" key={t}>{t}</li>
                 ))}
               </ul>
-              <div className="links">
-                {project.link && (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer">Live</a>
-                )}
-                {project.repo && (
-                  <a href={project.repo} target="_blank" rel="noopener noreferrer">Code</a>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }
